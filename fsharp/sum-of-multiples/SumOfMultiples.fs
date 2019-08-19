@@ -6,28 +6,16 @@ let sum (numbers: int list) (upperBound: int): int =
     match numbersCleaned with
     | [] -> 0
     | _ ->
-        let lowestNumber = 
-            List.sort numbersCleaned
-            |> List.head
-
-        let maxMultiplicatorNeeded = 
-            ((upperBound - 1) / lowestNumber + 1)
-
-        // multiplication integers
-        let multiplicators = [| 1 .. maxMultiplicatorNeeded |]
-    
-        // we only use numbers that are below the upper bound
         let numbersWithinBounds = 
             numbersCleaned |> List.filter (fun x -> x < upperBound)
 
-        // set of all unique multiples
-        let uniqueMultiples = 
-            [ for number in numbersWithinBounds do
-                for multiplicator in multiplicators do
-                    let value = number * multiplicator
-                    if value < upperBound then
-                        yield number * multiplicator ]
-            |> Set.ofList
+        [ for number in numbersWithinBounds do
+            let maxMultiplicator = (upperBound - 1) / number;
 
-        // sum them up
-        uniqueMultiples |> Set.toSeq |> Seq.sum
+            for multiplicator in [| 1 .. maxMultiplicator |] do
+                let value = number * multiplicator
+                if value < upperBound then
+                    yield value ]
+        |> Set.ofList
+        |> Set.toSeq 
+        |> Seq.sum
