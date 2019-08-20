@@ -1,7 +1,6 @@
 ﻿module TwoFer
 
 let twoFer (input: string option): string = 
-    match input with
-        | None -> "you"
-        | Some name -> name
+    input 
+    |> Option.defaultValue "you"
     |> sprintf "One for %s, one for me."
