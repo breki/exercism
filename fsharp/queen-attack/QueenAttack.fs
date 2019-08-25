@@ -7,9 +7,7 @@ let create (position: int * int) =
     | _ -> true
 
 let canAttack (queen1: int * int) (queen2: int * int) = 
-    let onDiagonal (queen1: int * int) (queen2: int * int) = 
-        let (x1, y1) = queen1
-        let (x2, y2) = queen2
+    let onDiagonal (x1, y1) (x2, y2) = 
         abs(x1 - x2) = abs(y1 - y2)
 
     match (queen1, queen2) with
