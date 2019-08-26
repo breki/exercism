@@ -1,10 +1,7 @@
 ﻿module QueenAttack
 
-let create (position: int * int) = 
-    match position with
-    | (x, _) when x < 0 || x >= 8 -> false
-    | (_, y) when y < 0 || y >= 8 -> false
-    | _ -> true
+let create (x, y) = 
+    x >= 0 && x < 8 && y >= 0 && y < 8
 
 let canAttack (queen1: int * int) (queen2: int * int) = 
     let onDiagonal (x1, y1) (x2, y2) = 
