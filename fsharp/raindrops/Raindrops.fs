@@ -8,16 +8,13 @@ let convert (number: int): string =
             7, "Plong"
         ]
     
-    let concatIfFactor (textSoFar: string) factorPair : string =
-        let (factor, factorText) = factorPair
+    let concatIfFactor textSoFar (factor, factorText) =
         match number % factor with
         | 0 -> textSoFar + factorText
         | _ -> textSoFar
 
-    let concatenated = 
-        factors 
-        |> List.fold concatIfFactor "" 
-
-    match concatenated with
-    | "" -> number.ToString(System.Globalization.CultureInfo.InvariantCulture)
-    | _ -> concatenated
+    factors 
+    |> List.fold concatIfFactor ""
+    |> function
+        | "" -> number.ToString(System.Globalization.CultureInfo.InvariantCulture)
+        | x -> x
