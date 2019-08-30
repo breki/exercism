@@ -1,9 +1,10 @@
 ﻿module Accumulate
 
-let rec accumulate 
-    (func: 'a -> 'b) (input: 'a list): 'b list =
-    match input with
-    | [] -> []
-    | [ x ] -> [ func x ]
-    | head::tail -> 
-        func head :: accumulate func tail 
+let accumulate func input =
+    
+    let rec accumulateRecursive func acc = function
+        | [] -> acc
+        | head::tail -> 
+            accumulateRecursive func (func head :: acc ) tail
+
+    accumulateRecursive func [] input |> List.rev
